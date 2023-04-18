@@ -1,13 +1,25 @@
-const express = require("express");
-
-const PORT = process.env.PORT || 8080;
-
+const express = require('express');
+const coursesRoutes = require("./routes/courses")
+const professionsRoutes = require("./routes/professions")
+const staffRoutes = require("./routes/staff")
+const studentsRoutes = require("./routes/students")
+const db = require('./db')
+const cors = require('cors');
 const app = express();
 
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server!" });
-});
+app.use(express.json())
+app.use(cors());
 
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
-});
+app.use("/courses", coursesRoutes);
+app.use("/professions", professionsRoutes);
+// app.use("/staff", staffRoutes);
+// app.use("/students", studentsRoutes);
+
+app.get("/", (req,res)=>{
+    res.json("backend!!!")
+})
+
+
+
+const port = process.env.PORT || 8080;
+app.listen(port,() => console.log(`Listening on port ${port}...`));

@@ -4,7 +4,7 @@ const {
   addStaffQuery,
   updateStaffQuery,
   getStaffQuery,
-} = require("../queries/tasks");
+} = require("../queries/staff");
 
 const getAllStaff = async () => {
   return await runQuery(getAllStaffQuery);
