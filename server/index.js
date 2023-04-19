@@ -12,8 +12,8 @@ app.use(cors());
 
 app.use("/courses", coursesRoutes);
 app.use("/professions", professionsRoutes);
-// app.use("/staff", staffRoutes);
-// app.use("/students", studentsRoutes);
+app.use("/staff", staffRoutes);
+app.use("/students", studentsRoutes);
 
 app.get("/", (req,res)=>{
     res.json("backend!!!")

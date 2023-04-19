@@ -2,7 +2,9 @@ const runQuery = require("./helpers/runQuery");
 const {
     getAllCoursesQuery,
     getCoursesForTeacherQuery,
-    getOpenCoursesQuery
+    getOpenCoursesQuery,
+    addCourseQuery,
+    getCourseQuery
 } = require("../queries/courses");
 
 const getAllCourses = async () => {
@@ -17,7 +19,24 @@ const getOpenCourses = async () => {
     return await runQuery(getOpenCoursesQuery);
   };
 
+  const addCourse = async (values) => {
+    return await runQuery(addCourseQuery, [
+      values[0],
+      values[1],
+      values[2],
+      values[3]
+    ]);
+  };
+
+  const getCourse = async (id) => {
+    return await runQuery(getCourseQuery, [id]);
+  };
+
+
 module.exports = {
     getAllCourses,
     getCoursesForTeacher,
-    getOpenCourses};
+    getOpenCourses,
+    addCourse,
+    getCourse
+  };

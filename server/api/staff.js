@@ -30,8 +30,7 @@ const updateStaff = async (values) => {
     values[3],
     values[4],
     values[5],
-    values[6],
-    values[7]
+    values[6]
   ]);
 };
 

@@ -29,7 +29,7 @@ router.post("/addStaff", async (req, res) => {
     ];
 
     const newStaff = await addStaff(values);
-    res.send(newStaff);
+    res.send(newStaff.rows);
 
     console.log("New staff member has been created successfully");
   } catch (error) {
