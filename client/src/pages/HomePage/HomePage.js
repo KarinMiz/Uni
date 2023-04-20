@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Staff from "../../components/Staff/Staff";
+import StaffTable from "../../components/StaffTable/StaffTable";
 
 const HomePage = () => {
   const [staff, setStaff] = useState([]);
   const [birthdayList, setBirthdayList] = useState([]);
+
   // Get the current date and time
   const now = new Date();
 
@@ -30,17 +31,18 @@ const HomePage = () => {
         new Date(date).getDate()) - Date.UTC(new Date(date).getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000
   }
 
-  const birthdayFilter = async () => {
-    setBirthdayList(staff.filter((s) => {
-        return Math.abs(getDayOfYear(new Date()) - getDayOfYear(s.birthday)) <= 7
-    }))
-  };
+
 
   useEffect(() => {
     fetchAllStaff();
   }, []);
 
   useEffect(() => {
+    const birthdayFilter = async () => {
+      setBirthdayList(staff.filter((s) => {
+          return Math.abs(getDayOfYear(new Date()) - getDayOfYear(s.birthday)) <= 7
+      }))
+    };
     birthdayFilter();
   }, [staff])
 
@@ -50,7 +52,7 @@ const HomePage = () => {
 
       {staff.length > 0 ? (
         <div className="staff">
-          <Staff staff={staff} />
+          <StaffTable staff={staff} />
         </div>
       ) : (
         <div>No Staff</div>
@@ -59,7 +61,7 @@ const HomePage = () => {
       <h1>Birthday of the week</h1>
       {birthdayList.length > 0 ? (
         <div className="staff">
-          <Staff staff={birthdayList} />
+          <StaffTable staff={birthdayList} />
         </div>
       ) : (
         <div>No birthday</div>

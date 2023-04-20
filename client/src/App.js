@@ -4,6 +4,8 @@ import HomePage from "../src/pages/HomePage/HomePage"
 import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SignInPage from './pages/Connection/SignInPage';
+import RegistrationPage from './pages/Connection/RegistrationPage';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/signIn" element={<SignInPage />} />
+            <Route path="/regist" element={<RegistrationPage />} />
           </Routes>
         </BrowserRouter>
       </div>

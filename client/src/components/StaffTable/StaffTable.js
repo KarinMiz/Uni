@@ -10,7 +10,7 @@ import {
   TableRow,
   tableCellClasses,
 } from "@mui/material";
-import "./Staff.css";
+import "./StaffTable.css";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,7 +32,27 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const Staff = (props) => {
+// const [selectedFile, setSelectedFile] = useState(null);
+// const uploadPicture = (picture) => {
+//   setSelectedFile(picture);
+//   handleUpload();
+// }
+// const handleUpload = () => {
+//   const formData = new FormData();
+//   formData.append('image', selectedFile);
+//   axios.post('/upload', formData, {
+//     headers: {
+//       'Content-Type': 'multipart/form-data'
+//     }
+//   }).then(response => {
+//     console.log(response.data);
+//   }).catch(error => {
+//     console.error(error);
+//   });
+// }
+
+const StaffTable = (props) => {
+
   return (
     <div className="form-task">
       <TableContainer component={Paper}>
@@ -42,20 +62,18 @@ const Staff = (props) => {
               <TableCell>Picture</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Job</TableCell>
-              <TableCell>Birthday</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {props.staff.map((s) => (
               <StyledTableRow key={s.id}>
                 <StyledTableCell component="th" scope="row">
-                  {s.picture}
+                  <img src={s.picture}/>
                 </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
                   {s.name}
                 </StyledTableCell>
                 <StyledTableCell align="left">{s.job}</StyledTableCell>
-                <StyledTableCell align="left">{new Date(s.birthday).getMonth()}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
@@ -65,4 +83,4 @@ const Staff = (props) => {
   );
 };
 
-export default Staff;
+export default StaffTable;

@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const multerUpload = require("../multer")
+
 const {
   getAllStaff,
   addStaff,
@@ -7,6 +9,18 @@ const {
   getStaff,
 } = require("../api/staff");
 
+
+const upload = multerUpload.single('image');
+router.post('/upload', function(req, res) {
+    upload(req.body.picture, res, function(err) {
+      if (err) {
+        console.log(err)
+        return res.status(500).send(err);
+      }
+      return res.status(200).send(req.body.fileName);
+    });
+  });
+ 
 router.get("/", async (req, res) => {
   try {
     const staff = await getAllStaff();
@@ -30,10 +44,11 @@ router.post("/addStaff", async (req, res) => {
 
     const newStaff = await addStaff(values);
     res.send(newStaff.rows);
-
+    
     console.log("New staff member has been created successfully");
   } catch (error) {
     res.send(error);
+    console.log(error);
   }
 });
 
