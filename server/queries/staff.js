@@ -6,11 +6,14 @@ const updateStaffQuery = "UPDATE staff SET name=$1, password=$2, job=$3, gender=
 
 const getStaffQuery = "SELECT * FROM staff WHERE id = $1"
 
+const deleteStaffQuery = "DELETE FROM staff WHERE id = $1;";
+
 module.exports = {
     getAllStaffQuery,
     addStaffQuery,
     updateStaffQuery,
-    getStaffQuery
+    getStaffQuery,
+    deleteStaffQuery
 }
 
 

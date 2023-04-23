@@ -34,17 +34,30 @@ const RegistrationPage = () => {
   const handleChangeBirthday = (e) => {
     setBirthday(e.target.value);
   };
-  const handleChangePicture = (e) => {
-    setPicture(e.target.value);
-    console.log("upload:" + e.target.value);
+  const handleChangePicture = (e) => {  
+    setPicture(e.target.files[0]);    
+    // console.log("upload:" + e.target.value);
   };
   const pictureUpload = async () => {
+    const data = new FormData();
+    data.append("file", picture)
     try {
-      await axios.post(uploadApiUrl, { picture: picture, fileName: id });
-      console.log("Uploading picture:", picture);
+        await fetch(`${uploadApiUrl}/${id}`,{
+            method: "POST",
+            body: data
+        })
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
+    // try {
+    //   const body = {
+    //     picture: picture,
+    //   };
+    //   await axios.post(`${uploadApiUrl}/${id}`, body);
+    //   console.log("Uploading picture:", picture);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const handleClick = async (e) => {
@@ -94,7 +107,7 @@ const RegistrationPage = () => {
         onChange={handleChangeBirthday}
         required
       />
-      <input type="file" accept="image/*" onChange={handleChangePicture} />
+      <input type="file" accept="image" onChange={handleChangePicture} />
       <button onClick={handleClick}>Sign up</button>
     </div>
   );
