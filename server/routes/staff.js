@@ -9,6 +9,7 @@ const {
   updateStaff,
   getStaff,
   deleteStaff,
+  getTeachers,
 } = require("../api/staff");
 
 router.post(
@@ -21,6 +22,15 @@ router.get("/", async (req, res) => {
   try {
     const staff = await getAllStaff();
     res.send(staff.rows);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+router.get("/getTeachers", async (req, res) => {
+  try {
+    const teachers = await getTeachers();
+    res.send(teachers.rows);
   } catch (error) {
     res.send(error);
   }

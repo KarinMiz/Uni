@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 import {
-    Button,
+  Button,
   Paper,
   Table,
   TableBody,
@@ -11,7 +11,6 @@ import {
   TableRow,
   tableCellClasses,
 } from "@mui/material";
-import "./StaffTable.css";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -34,7 +33,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const TeachersTable = (props) => {
-
   return (
     <div className="form-task">
       <TableContainer component={Paper}>
@@ -48,18 +46,22 @@ const TeachersTable = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.staff.map((s) => (
+            {props.teachers.map((s) => (
               <StyledTableRow key={s.id}>
                 <StyledTableCell component="th" scope="row">
-                  <img src={s.picture}/>
+                  <img src={s.picture} alt="img"/>
                 </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
-                  {s.name}
+                {s.name}
                 </StyledTableCell>
                 <StyledTableCell align="left">{s.job}</StyledTableCell>
                 <StyledTableCell component="th" scope="row">
-                  <Button variant="contained" color="primary">Manage Courses</Button>
-                  <Button variant="contained" color="primary">Dismissal Teachers</Button>
+                  <Button variant="contained" color="primary">
+                    Manage Courses
+                  </Button>
+                  <Button variant="contained" color="primary">
+                    Dismissal Teachers
+                  </Button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}

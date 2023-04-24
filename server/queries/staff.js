@@ -8,6 +8,7 @@ const getStaffQuery = "SELECT * FROM staff WHERE id = $1"
 
 const deleteStaffQuery = "DELETE FROM staff WHERE id = $1;";
 
+const getTeachersQuery = "SELECT * FROM staff WHERE job='teacher'";
 
 
 module.exports = {
@@ -15,7 +16,8 @@ module.exports = {
     addStaffQuery,
     updateStaffQuery,
     getStaffQuery,
-    deleteStaffQuery
+    deleteStaffQuery,
+    getTeachersQuery
 }
 
 

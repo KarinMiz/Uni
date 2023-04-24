@@ -5,6 +5,7 @@ const {
   updateStaffQuery,
   getStaffQuery,
   deleteStaffQuery,
+  getTeachersQuery
 } = require("../queries/staff");
 
 const getAllStaff = async () => {
@@ -39,6 +40,10 @@ const getStaff = async (id) => {
   return await runQuery(getStaffQuery, [id]);
 };
 
+const getTeachers = async (id) => {
+  return await runQuery(getTeachersQuery, [id]);
+};
+
 const deleteStaff = async (id) => {
   return await runQuery(deleteStaffQuery, [id]);
 };
@@ -49,5 +54,6 @@ module.exports = {
     addStaff,
     updateStaff,
     getStaff,
-    deleteStaff
+    deleteStaff,
+    getTeachers
 };

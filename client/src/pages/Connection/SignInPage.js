@@ -1,31 +1,25 @@
-import axios from "axios";
 import React from "react";
 import {
   Input,
-  Select,
-  MenuItem,
   Button,
-  InputLabel,
-  FormControl,
   Grid,
-  Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 
 const SignInPage = () => {
   const navigate = useNavigate();
-  const registerApiUrl = "http://localhost:8080/auth/register";
-  const addStaffApiUrl = "http://localhost:8080/staff/addStaff";
+  // const registerApiUrl = "http://localhost:8080/auth/register";
+  // const addStaffApiUrl = "http://localhost:8080/staff/addStaff";
   const handleChangeId = (e) => {};
   const handleChangePassword = (e) => {};
   const handleClick = async (e) => {
     // if (id && name && password && role && gender) {
     e.preventDefault();
     try {
-      const body = {
+      // const body = {
 
-      };
+      // };
 
       navigate("/homePage");
     } catch (error) {

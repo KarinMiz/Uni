@@ -6,7 +6,7 @@ export default function Navbar() {
 
   return (
     <nav className="nav">
-      <h6 className="site-title" onClick={()=>{window.location.href="/"}} style={{cursor:'pointer'}}>My Todo List</h6>
+      <h6 className="site-title" onClick={()=>{window.location.href="/"}} style={{cursor:'pointer'}}>TLV Uni</h6>
       <ul>
         <li className={path === "/" ? "active" : ""}>
           <a href="/">Home</a>

@@ -52,7 +52,7 @@ const HomePage = () => {
 
       {staff.length > 0 ? (
         <div className="staff">
-          <StaffTable staff={staff} />
+          <StaffTable staff={staff} type="s" />
         </div>
       ) : (
         <div>No Staff</div>
@@ -61,7 +61,7 @@ const HomePage = () => {
       <h1>Birthday of the week</h1>
       {birthdayList.length > 0 ? (
         <div className="staff">
-          <StaffTable staff={birthdayList} />
+          <StaffTable staff={birthdayList} type="b"/>
         </div>
       ) : (
         <div>No birthday</div>

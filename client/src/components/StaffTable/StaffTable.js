@@ -52,7 +52,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 // }
 
 const StaffTable = (props) => {
-
+  const thisYear = new Date().getFullYear();
   return (
     <div className="form-task">
       <TableContainer component={Paper}>
@@ -61,19 +61,31 @@ const StaffTable = (props) => {
             <TableRow>
               <TableCell>Picture</TableCell>
               <TableCell>Name</TableCell>
+              {props.type === "b" ?
+              <TableCell>Birthday Date</TableCell>
+              :
               <TableCell>Job</TableCell>
+              }
+              
             </TableRow>
           </TableHead>
           <TableBody>
             {props.staff.map((s) => (
               <StyledTableRow key={s.id}>
                 <StyledTableCell component="th" scope="row">
-                  <img src={s.picture}/>
+                  <img src={s.picture} alt={`${s.id} user pic`}/>
                 </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
                   {s.name}
                 </StyledTableCell>
+                {props.type === "b" ? 
+                <StyledTableCell align="left">
+                  {new Date (s.birthday).toLocaleDateString(undefined, {month: "short", day: "numeric"})}
+                </StyledTableCell>
+                : 
                 <StyledTableCell align="left">{s.job}</StyledTableCell>
+                }
+                
               </StyledTableRow>
             ))}
           </TableBody>

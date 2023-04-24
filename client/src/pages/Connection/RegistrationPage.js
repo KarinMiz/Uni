@@ -115,7 +115,7 @@ const RegistrationPage = () => {
         </Grid>
         <Grid item xs={8}>
           <FormControl sx={{ minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-label">Role</InputLabel>
             <Select onChange={handleChangeRole} label="Role">
               <MenuItem value="director">director</MenuItem>
               <MenuItem value="teacher">teacher</MenuItem>
