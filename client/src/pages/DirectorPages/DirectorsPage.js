@@ -1,46 +1,43 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import TeachersTable from "../../components/TeachersTable/TeachersTable";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+import "./DirectorPage.css";
 
 const DirectorsPage = () => {
-  const [teachers, setTeachers] = useState([]);
-
-  // Get the current date and time
-  const now = new Date();
-
-  // Calculate the date that is exactly one week from today
-  const oneWeekFromNow = new Date();
-  oneWeekFromNow.setDate(now.getDate() + 7);
-
-  const apiUrl = "http://localhost:8080/staff";
-
-  const fetchAllStaff = async () => {
-    try {
-      const res = await axios.get(apiUrl);
-      setTeachers(res.data);
-      return res.data;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchAllStaff();
-  }, []);
+  const navigate = useNavigate();
 
   return (
     <div>
-      <h1>Current Staff:</h1>
-
-      {teachers.length > 0 ? (
-        <div className="staff">
-          <TeachersTable teachers={teachers.filter((t)=>t.job==="teacher")} />
+      <h1>Director Page</h1>
+      <div className="directors-pages-wrap">
+        <div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={navigate("/teacherMangement")}
+          >
+            Changing Lists
+          </Button>
         </div>
-      ) : (
-        <div>No Staff</div>
-      )}
-
-
+        <div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={navigate("/teacherMangement")}
+          >
+            Teachers Management
+          </Button>
+        </div>
+        <div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={navigate("/teacherMangement")}
+          >
+            Students Management
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

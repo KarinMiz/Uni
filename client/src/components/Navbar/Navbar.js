@@ -6,15 +6,15 @@ export default function Navbar() {
 
   return (
     <nav className="nav">
-      <h6 className="site-title" onClick={()=>{window.location.href="/"}} style={{cursor:'pointer'}}>TLV Uni</h6>
+      <h6 className="site-title" onClick={()=>{window.location.href="/homePage"}} style={{cursor:'pointer'}}>TLV Uni</h6>
       <ul>
-        <li className={path === "/" ? "active" : ""}>
-          <a href="/">Home</a>
+        <li className={path === "/homePage" ? "active" : ""}>
+          <a href="/homePage">Home</a>
         </li>
-        {/* <li className={path === "/add" ? "active" : ""}>
-          <a href="/add">Add</a>
+        <li className={path === "/directorsPage" ? "active" : ""}>
+          <a href="/directorsPage">Directors Pages</a>
         </li>
-        <li className={path === "/history" ? "active" : ""}>
+        {/* <li className={path === "/history" ? "active" : ""}>
           <a href="/history">History</a>
         </li> */}
       </ul>

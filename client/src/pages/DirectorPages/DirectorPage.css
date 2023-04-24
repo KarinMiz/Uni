@@ -1,0 +1,20 @@
+.directors-pages-wrap{
+    gap: 8rem;
+    padding: 10px;
+}
+
+.directors-pages-wrap div{
+    display: flex;
+    gap: 10rem;
+    justify-content: center;
+    padding: 20px;
+    
+}
+
+.directors-pages-wrap Button{
+    width: 15cm;
+    height: 2cm;
+    font-size: 20px;
+    font-weight: bold;
+}
+

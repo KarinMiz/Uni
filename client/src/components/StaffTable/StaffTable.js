@@ -52,7 +52,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 // }
 
 const StaffTable = (props) => {
-  const thisYear = new Date().getFullYear();
+  // const thisYear = new Date().getFullYear();
   return (
     <div className="form-task">
       <TableContainer component={Paper}>
