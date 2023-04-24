@@ -1,6 +1,16 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  Input,
+  Select,
+  MenuItem,
+  Button,
+  InputLabel,
+  FormControl,
+  Grid,
+  Typography,
+} from "@mui/material";
 
 const RegistrationPage = () => {
   const addStaffApiUrl = "http://localhost:8080/staff/addStaff";
@@ -34,20 +44,20 @@ const RegistrationPage = () => {
   const handleChangeBirthday = (e) => {
     setBirthday(e.target.value);
   };
-  const handleChangePicture = (e) => {  
-    setPicture(e.target.files[0]);    
+  const handleChangePicture = (e) => {
+    setPicture(e.target.files[0]);
     // console.log("upload:" + e.target.value);
   };
   const pictureUpload = async () => {
     const data = new FormData();
-    data.append("file", picture)
+    data.append("file", picture);
     try {
-        await fetch(`${uploadApiUrl}/${id}`,{
-            method: "POST",
-            body: data
-        })
+      await fetch(`${uploadApiUrl}/${id}`, {
+        method: "POST",
+        body: data,
+      });
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
     // try {
     //   const body = {
@@ -76,7 +86,7 @@ const RegistrationPage = () => {
       console.log(body);
       await axios.post(addStaffApiUrl, body);
       pictureUpload();
-      navigate("/");
+      navigate("/homePage");
     } catch (error) {
       console.log(error);
     }
@@ -84,31 +94,62 @@ const RegistrationPage = () => {
   };
   return (
     <div>
-      <h1 className="title">Registration Page</h1>
-
-      <input placeholder="ID number" onChange={handleChangeId}></input>
-      <input placeholder="Full Name" onChange={handleChangeName}></input>
-      <input placeholder="Password" onChange={handleChangePassword}></input>
-      <select onChange={handleChangeRole}>
-        <option value={null}>Select your role</option>
-        <option value="director">director</option>
-        <option value="teacher">teacher</option>
-      </select>
-      <select onChange={handleChangeGender}>
-        <option value={null}>Select Gender</option>
-        <option value="female">female</option>
-        <option value="male">male</option>
-      </select>
-      <input
-        type="date"
-        placeholder="deadline"
-        max={currentDate}
-        name="birthday-date"
-        onChange={handleChangeBirthday}
-        required
-      />
-      <input type="file" accept="image" onChange={handleChangePicture} />
-      <button onClick={handleClick}>Sign up</button>
+      <Typography m={5} variant="h3">
+        Registration Page
+      </Typography>
+      <Grid
+        container
+        spacing={5}
+        alignItems="left"
+        justifyContent="flex-start"
+        display={"flex"}
+      >
+        <Grid item xs={8}>
+          <Input placeholder="ID number" onChange={handleChangeId}></Input>
+        </Grid>
+        <Grid item xs={8}>
+          <Input placeholder="Full Name" onChange={handleChangeName}></Input>
+        </Grid>
+        <Grid item xs={8}>
+          <Input placeholder="Password" onChange={handleChangePassword}></Input>
+        </Grid>
+        <Grid item xs={8}>
+          <FormControl sx={{ minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <Select onChange={handleChangeRole} label="Role">
+              <MenuItem value="director">director</MenuItem>
+              <MenuItem value="teacher">teacher</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={8}>
+          <FormControl sx={{ minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+            <Select onChange={handleChangeGender} label="Gender">
+              <MenuItem value="female">female</MenuItem>
+              <MenuItem value="male">male</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={8}>
+          <Input
+            type="date"
+            placeholder="deadline"
+            max={currentDate}
+            name="birthday-date"
+            onChange={handleChangeBirthday}
+            required
+          />
+        </Grid>
+        <Grid item xs={8}>
+          <Input type="file" accept="image" onChange={handleChangePicture} />
+        </Grid>
+        <Grid item xs={8}>
+          <Button onClick={handleClick} variant="contained" color="primary">
+            Sign up
+          </Button>
+        </Grid>
+      </Grid>
     </div>
   );
 };

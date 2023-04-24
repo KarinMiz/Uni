@@ -6,6 +6,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignInPage from './pages/Connection/SignInPage';
 import RegistrationPage from './pages/Connection/RegistrationPage';
+import TeachersManagement from './pages/DirectorPages/TeachersManagement';
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/signIn" element={<SignInPage />} />
+            <Route path="/" element={<SignInPage />} />
+            <Route path="/homePage" element={<HomePage />} />
             <Route path="/regist" element={<RegistrationPage />} />
+            <Route path='/teachersManage' element={<TeachersManagement/>}/>
           </Routes>
         </BrowserRouter>
       </div>

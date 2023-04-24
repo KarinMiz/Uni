@@ -8,6 +8,8 @@ const getStaffQuery = "SELECT * FROM staff WHERE id = $1"
 
 const deleteStaffQuery = "DELETE FROM staff WHERE id = $1;";
 
+
+
 module.exports = {
     getAllStaffQuery,
     addStaffQuery,

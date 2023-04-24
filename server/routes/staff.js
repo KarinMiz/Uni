@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userUpload = require("../multer");
+const bcrypt = require("bcryptjs");
 
 const {
   getAllStaff,
@@ -10,19 +11,11 @@ const {
   deleteStaff,
 } = require("../api/staff");
 
-const upload = userUpload.single("file");
-router.post("/upload/:id", userUpload.single("file"), async function (req, res, next) {
-  console.log("hereeee")
-});
-// function(req, res) {
-//     upload(req.body.picture, res, function(err) {
-//       if (err) {
-//         console.log(err)
-//         return res.status(500).send(err);
-//       }
-//       return res.status(200).send(req.body.fileName);
-//     });
-//   });
+router.post(
+  "/upload/:id",
+  userUpload.single("file"),
+  async function (req, res, next) {}
+);
 
 router.get("/", async (req, res) => {
   try {
@@ -35,6 +28,9 @@ router.get("/", async (req, res) => {
 
 router.post("/addStaff", async (req, res) => {
   try {
+    //Hash the password and create a user
+    // var salt = bcrypt.genSaltSync(10);
+    // var hash = bcrypt.hashSync(req.body.password, salt);
     const values = [
       req.body.id,
       req.body.name,
@@ -100,7 +96,8 @@ router.put("/deleteStaff/:id", async (req, res) => {
 
 router.get("/getPicture/:id", async (req, res) => {
   try {
-    const path = "C:/Users/Lev Hayam/Desktop/Karin/My-Uni/Uni/server/staff-images";
+    const path =
+      "C:/Users/Lev Hayam/Desktop/Karin/My-Uni/Uni/server/staff-images";
     res.send(path);
   } catch (error) {
     res.send(error);
