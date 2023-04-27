@@ -85,6 +85,7 @@ router.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
 
+    console.log(id);
     const staff = await getStaff(id);
     res.send(staff.rows);
   } catch (error) {

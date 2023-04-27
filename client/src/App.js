@@ -10,6 +10,7 @@ import DirectorsPage from './pages/DirectorPages/DirectorsPage';
 import TeachersManagement from './pages/DirectorPages/TeachersManagement';
 import StudentsManagement from './pages/DirectorPages/StudentsManagement';
 import ChangingLists from './pages/DirectorPages/ChangingLists';
+import CoursesDisplay from './pages/DirectorPages/CoursesDisplay';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/teacherManagement" element={<TeachersManagement/>}/>
             <Route path="/studentManagement" element={<StudentsManagement/>}/>     
             <Route path="/changingLists" element={<ChangingLists/>}/>
+            <Route path="/coursesDisplay" element={<CoursesDisplay/>}/>
           </Routes>
         </BrowserRouter>
       </div>

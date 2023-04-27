@@ -1,15 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import StudentTable from "../../components/StudentsTable/StudentsTable";
+import CoursesTable from "../../components/CoursesTable/CoursesTable";
 
 const StudentsManagement = () => {
-  const [students, setStudents] = useState([]);
-  const apiUrl = "http://localhost:8080/students";
+  const [courses, setCourses] = useState([]);
+  const apiUrl = "http://localhost:8080/courses";
 
   const fetchAllStaff = async () => {
     try {
       const res = await axios.get(apiUrl);
-      setStudents(res.data);
+      setCourses(res.data);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -22,13 +22,13 @@ const StudentsManagement = () => {
 
   return (
     <div>
-      <h1>Students Management</h1>
-      {students.length > 0 ? (
+      <h1>Courses Display</h1>
+      {courses.length > 0 ? (
         <div className="students">
-            <StudentTable students={students}/>
+            <CoursesTable courses={courses}/>
         </div>
       ) : (
-        <div>No Students</div>
+        <div>No Courses</div>
       )}
     </div>
   );

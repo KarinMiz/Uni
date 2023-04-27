@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { styled } from "@mui/material/styles";
 import {
   Button,
@@ -33,6 +34,49 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const TeachersTable = (props) => {
+  const [staff, setStaff] = useState([]);
+  const [course, setCourse] = useState([]);
+  const apiUrl = "http://localhost:8080/courses";
+  const getStaffIdApiUrl = "http://localhost:8080/staff";
+  const getCourseIdApiUrl = "http://localhost:8080/professions";
+
+  // const getCourse = async (id) => {
+  //   try {
+  //     const res = await axios.get(`${getStaffIdApiUrl}/${id}`);
+  //     console.log(res.data[0]);
+  //     setStaff(res.data[0]);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // const getStaffId = async (id) => {
+  //   try {
+  //     const res = await axios.get(`${getStaffIdApiUrl}/${id}`);
+  //     console.log(res.data[0]);
+  //     setStaff(res.data[0]);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // const getCourseId = async (id) => {
+  //   try {
+  //     const res = await axios.get(`${getCourseIdApiUrl}/${id}`);  
+  //     console.log(res.data[0]);
+  //     setCourse(res.data[0]);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  useEffect(() => {
+    // getStaffId(525788989);
+    // getCourseId(1);
+  }, []);
+
+
+
   return (
     <div className="form-task">
       <TableContainer component={Paper}>
@@ -40,25 +84,28 @@ const TeachersTable = (props) => {
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
               <TableCell>Profession</TableCell>
               <TableCell>Teacher</TableCell>
               <TableCell>Status</TableCell>
+              <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.courses.map((s) => (
-              <StyledTableRow key={s.id}>
+            {props.courses.map((c) => (
+              <StyledTableRow >
                 <StyledTableCell component="th" scope="row">
-                 {s.id} 
+                  {c.id}
                 </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
-                 {s.name} 
+                  {c.p_name}
+                  {console.log(c)}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {c.t_name}
                 </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
-                {s.profession}
+                  {c.status}
                 </StyledTableCell>
-                <StyledTableCell align="left">{s.yearbook}</StyledTableCell>
                 <StyledTableCell component="th" scope="row">
                   <Button variant="contained" color="primary">
                     delete

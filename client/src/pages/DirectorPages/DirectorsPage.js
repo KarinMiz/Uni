@@ -19,7 +19,7 @@ const DirectorsPage = () => {
   };
 
   const handleButtonClick04 = () => {
-    navigate("/studentManagement");
+    navigate("/coursesDisplay");
   };
 
   return (
