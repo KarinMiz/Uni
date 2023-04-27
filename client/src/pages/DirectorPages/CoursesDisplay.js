@@ -1,5 +1,3 @@
-// Access : only director
-// 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import StudentTable from "../../components/StudentsTable/StudentsTable";

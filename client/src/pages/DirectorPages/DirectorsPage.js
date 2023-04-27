@@ -6,6 +6,22 @@ import "./DirectorPage.css";
 const DirectorsPage = () => {
   const navigate = useNavigate();
 
+  const handleButtonClick01 = () => {
+    navigate("/changingLists");
+  };
+
+  const handleButtonClick02 = () => {
+    navigate("/teacherManagement");
+  };
+
+  const handleButtonClick03 = () => {
+    navigate("/studentManagement");
+  };
+
+  const handleButtonClick04 = () => {
+    navigate("/studentManagement");
+  };
+
   return (
     <div>
       <h1>Director Page</h1>
@@ -14,7 +30,7 @@ const DirectorsPage = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={navigate("/teacherMangement")}
+            onClick={handleButtonClick01}
           >
             Changing Lists
           </Button>
@@ -23,7 +39,7 @@ const DirectorsPage = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={navigate("/teacherMangement")}
+            onClick={handleButtonClick02}
           >
             Teachers Management
           </Button>
@@ -32,9 +48,18 @@ const DirectorsPage = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={navigate("/teacherMangement")}
+            onClick={handleButtonClick03}
           >
             Students Management
+          </Button>
+        </div>
+        <div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleButtonClick04}
+          >
+            Courses Display
           </Button>
         </div>
       </div>

@@ -22,8 +22,9 @@ const ChangingLists = () => {
   
   return (
     <div>
-      <title>Professions</title>
-      <title>Locations</title>
+      <h1>Changing Lists</h1>
+      <h3>Professions</h3>
+      <h3>Locations</h3>
     </div>
   );
 };
