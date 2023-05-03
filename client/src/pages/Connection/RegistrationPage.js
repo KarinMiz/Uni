@@ -79,7 +79,7 @@ const RegistrationPage = () => {
     if (id && existId.data[0]) {
       setIsExist(true);
       setMessage("User id already exists! Please choose another id or sign in ");
-    } else if (id && name && password && birthday && picture) {
+    } else if (id && name && password && birthday) {
       e.preventDefault();
       try {
         const body = {
@@ -88,11 +88,10 @@ const RegistrationPage = () => {
           job: role,
           gender: gender,
           birthday: birthday,
-          picture: picture,
           id: id
         };
         console.log(body);
-        await axios.post(addStaffApiUrl, body);
+        await axios.post(addStaffApiUrl, body ,{ withCredentials: true });
         pictureUpload();
         navigate("/homePage");
       } catch (error) {

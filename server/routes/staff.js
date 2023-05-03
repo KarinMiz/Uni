@@ -39,10 +39,11 @@ router.get("/getTeachers", async (req, res) => {
 
 router.post("/addStaff", async (req, res) => {
   try {
-
     const newStaff = await addStaff(req.body);
+    const userid = req.body.id;
+    console.log(req.body.id);
+    req.session.userid = userid;
     res.send(newStaff.rows);
-
     console.log("New staff member has been created successfully");
   } catch (error) {
     res.send(error);
@@ -52,7 +53,6 @@ router.post("/addStaff", async (req, res) => {
 
 router.put("/updateStaff/:id", async (req, res) => {
   try {
-
     const newStaff = await updateStaff(req.body);
     res.send(newStaff);
 
@@ -85,30 +85,20 @@ router.put("/deleteStaff/:id", async (req, res) => {
   }
 });
 
-router.get("/getPicture/:id", function (req, res,next) {
-  var options = {root: path.join()}
+router.get("/getPicture/:id", function (req, res, next) {
+  var options = { root: path.join() };
   const id = req.params.id;
   const usetPicture = `staff-images/${id}.png`;
   res.sendFile(usetPicture, options, function (err) {
-    if(err){
+    if (err) {
       const defaultPicture = "staff-images/default.png";
       res.sendFile(defaultPicture, options, function (err) {
-          if(err){
-            next(err)
-          }
-      })
-    }})
+        if (err) {
+          next(err);
+        }
+      });
+    }
   });
-  // try {
-  //   const id = req.params.id;
-  //   const usetPicture = `../staff-images/${id}.png`;
-  //   const defaultPicture = "../staff-images/default.png";
-  //   const filename = usetPicture || defaultPicture;
-  //   console.log(filename);
-  //   res.send.file(filename)
-  // } catch (error) {
-  //   res.send(error);
-  // }
-// });
+});
 
 module.exports = router;
