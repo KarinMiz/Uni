@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+// import axios from "axios";
 import { styled } from "@mui/material/styles";
 import {
   Button,
@@ -34,11 +34,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const TeachersTable = (props) => {
-  const [staff, setStaff] = useState([]);
-  const [course, setCourse] = useState([]);
-  const apiUrl = "http://localhost:8080/courses";
-  const getStaffIdApiUrl = "http://localhost:8080/staff";
-  const getCourseIdApiUrl = "http://localhost:8080/professions";
+  // const [staff, setStaff] = useState([]);
+  // const [course, setCourse] = useState([]);
+  // const apiUrl = "http://localhost:8080/courses";
+  // const getStaffIdApiUrl = "http://localhost:8080/staff";
+  // const getCourseIdApiUrl = "http://localhost:8080/professions";
 
   // const getCourse = async (id) => {
   //   try {

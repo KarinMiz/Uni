@@ -38,20 +38,8 @@ router.get("/getTeachers", async (req, res) => {
 
 router.post("/addStaff", async (req, res) => {
   try {
-    //Hash the password and create a user
-    // var salt = bcrypt.genSaltSync(10);
-    // var hash = bcrypt.hashSync(req.body.password, salt);
-    const values = [
-      req.body.id,
-      req.body.name,
-      req.body.password,
-      req.body.job,
-      req.body.gender,
-      req.body.birthday,
-      req.body.picture,
-    ];
 
-    const newStaff = await addStaff(values);
+    const newStaff = await addStaff(req.body);
     res.send(newStaff.rows);
 
     console.log("New staff member has been created successfully");
@@ -84,9 +72,8 @@ router.put("/updateStaff/:id", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-
-    console.log(id);
     const staff = await getStaff(id);
+    // console.log(staff.rows);
     res.send(staff.rows);
   } catch (error) {
     res.send(error);
@@ -107,9 +94,11 @@ router.put("/deleteStaff/:id", async (req, res) => {
 
 router.get("/getPicture/:id", async (req, res) => {
   try {
-    const path =
-      "C:/Users/Lev Hayam/Desktop/Karin/My-Uni/Uni/server/staff-images";
-    res.send(path);
+    const id = req.params.id;
+    const usetPicture = `../staff-images/${id}.png`;
+    const defaultPicture = "../staff-images/default.png";
+    const filename = usetPicture || defaultPicture;
+    res.send.file(filename)
   } catch (error) {
     res.send(error);
   }

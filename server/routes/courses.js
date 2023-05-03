@@ -12,7 +12,6 @@ router.get("/", async (req, res) => {
   try {
     const courses = await getAllCourses();
     res.send(courses.rows);
-    console.log(courses.rows);
   } catch (error) {
     res.send(error);
   }

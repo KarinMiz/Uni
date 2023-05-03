@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from "../src/components/Navbar/Navbar";
 import HomePage from "../src/pages/HomePage/HomePage"
 import "./App.css";
@@ -11,8 +11,22 @@ import TeachersManagement from './pages/DirectorPages/TeachersManagement';
 import StudentsManagement from './pages/DirectorPages/StudentsManagement';
 import ChangingLists from './pages/DirectorPages/ChangingLists';
 import CoursesDisplay from './pages/DirectorPages/CoursesDisplay';
+import axios from 'axios';
 
 function App() {
+  const apiUrl = "http://localhost:8080/currentUser";
+
+  const checkSession = async () => {
+    try {
+      const res = await axios.get(apiUrl, { withCredentials: true });
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(()=>{
+    checkSession();
+  },[])
   return (
     <div>
       <Navbar />

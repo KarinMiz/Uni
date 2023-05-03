@@ -32,27 +32,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-// const [selectedFile, setSelectedFile] = useState(null);
-// const uploadPicture = (picture) => {
-//   setSelectedFile(picture);
-//   handleUpload();
-// }
-// const handleUpload = () => {
-//   const formData = new FormData();
-//   formData.append('image', selectedFile);
-//   axios.post('/upload', formData, {
-//     headers: {
-//       'Content-Type': 'multipart/form-data'
-//     }
-//   }).then(response => {
-//     console.log(response.data);
-//   }).catch(error => {
-//     console.error(error);
-//   });
-// }
 
 const StaffTable = (props) => {
-  // const thisYear = new Date().getFullYear();
+
+  const imageApiUrl = "http://localhost:8080/staff/getPicture/"
   return (
     <div className="form-task">
       <TableContainer component={Paper}>
@@ -73,7 +56,7 @@ const StaffTable = (props) => {
             {props.staff.map((s) => (
               <StyledTableRow key={s.id}>
                 <StyledTableCell component="th" scope="row">
-                  <img src={s.picture} alt={`${s.id} user pic`}/>
+                  <img src={`${imageApiUrl}${s.id}`} />
                 </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
                   {s.name}
