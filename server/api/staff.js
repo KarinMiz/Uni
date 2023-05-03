@@ -24,20 +24,18 @@ const addStaff = async (values) => {
       hash,
       values.job,
       values.gender,
-      values.birthday,
-      values.picture   
+      values.birthday, 
     ]);
   };
 
 const updateStaff = async (values) => {
   return await runQuery(updateStaffQuery, [
-    values[0],
-    values[1],
-    values[2],
-    values[3],
-    values[4],
-    values[5],
-    values[6]
+    values.id,
+    values.name,
+    values.password,
+    values.job,
+    values.gender,
+    values.birthday, 
   ]);
 };
 

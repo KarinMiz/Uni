@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import {
+  CardMedia,
   Paper,
   Table,
   TableBody,
@@ -11,6 +12,7 @@ import {
   tableCellClasses,
 } from "@mui/material";
 import "./StaffTable.css";
+import axios from "axios";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -34,8 +36,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 const StaffTable = (props) => {
-
+  const [image, setImage] = useState([]);
   const imageApiUrl = "http://localhost:8080/staff/getPicture/"
+  // const getImage = async (id) => {
+  //   try {
+  //     const res = await axios.get(`${imageApiUrl}${id}`);
+  //     setImage(res.data);
+  //     console.log(image);
+  //     return res.data;   
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+
   return (
     <div className="form-task">
       <TableContainer component={Paper}>
@@ -56,7 +70,8 @@ const StaffTable = (props) => {
             {props.staff.map((s) => (
               <StyledTableRow key={s.id}>
                 <StyledTableCell component="th" scope="row">
-                  <img src={`${imageApiUrl}${s.id}`} />
+                  {/* <img src={()=>{getImage(s.id)}} alt={s.id}/> */}
+                  <CardMedia component="img" src={`${imageApiUrl}${s.id}`} height="115"  sx={{objectFit: "contain" }}  />
                 </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
                   {s.name}

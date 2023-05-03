@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const userUpload = require("../multer");
 const bcrypt = require("bcryptjs");
+const path = require("path");
 
 const {
   getAllStaff,
@@ -51,16 +52,8 @@ router.post("/addStaff", async (req, res) => {
 
 router.put("/updateStaff/:id", async (req, res) => {
   try {
-    const values = [
-      req.body.name,
-      req.body.password,
-      req.body.job,
-      req.body.gender,
-      req.body.birthday,
-      req.body.picture,
-      req.params.id,
-    ];
-    const newStaff = await updateStaff(values);
+
+    const newStaff = await updateStaff(req.body);
     res.send(newStaff);
 
     console.log(` ${req.body.name} details has been updated successfully`);
@@ -92,16 +85,30 @@ router.put("/deleteStaff/:id", async (req, res) => {
   }
 });
 
-router.get("/getPicture/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const usetPicture = `../staff-images/${id}.png`;
-    const defaultPicture = "../staff-images/default.png";
-    const filename = usetPicture || defaultPicture;
-    res.send.file(filename)
-  } catch (error) {
-    res.send(error);
-  }
-});
+router.get("/getPicture/:id", function (req, res,next) {
+  var options = {root: path.join()}
+  const id = req.params.id;
+  const usetPicture = `staff-images/${id}.png`;
+  res.sendFile(usetPicture, options, function (err) {
+    if(err){
+      const defaultPicture = "staff-images/default.png";
+      res.sendFile(defaultPicture, options, function (err) {
+          if(err){
+            next(err)
+          }
+      })
+    }})
+  });
+  // try {
+  //   const id = req.params.id;
+  //   const usetPicture = `../staff-images/${id}.png`;
+  //   const defaultPicture = "../staff-images/default.png";
+  //   const filename = usetPicture || defaultPicture;
+  //   console.log(filename);
+  //   res.send.file(filename)
+  // } catch (error) {
+  //   res.send(error);
+  // }
+// });
 
 module.exports = router;
