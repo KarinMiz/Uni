@@ -22,6 +22,12 @@
     margin: 15px;
 }
 
+.user-details{
+    font-size: 25px;
+    margin-top: 22px;
+    margin-right: 1000px;
+}
+
 .nav ul{
     padding: 0;
     margin: 0;

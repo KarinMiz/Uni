@@ -11,6 +11,7 @@ const {
   getStaff,
   deleteStaff,
   getTeachers,
+  getRoleById
 } = require("../api/staff");
 
 router.post(
@@ -41,9 +42,13 @@ router.post("/addStaff", async (req, res) => {
   try {
     const newStaff = await addStaff(req.body);
     const userid = req.body.id;
+    const username = req.body.name;
+    const userrole = req.body.job;
     console.log(req.body.id);
-    req.session.userid = userid;
-    res.send(newStaff.rows);
+    req.session.id = userid;
+    req.session.name = username;
+    req.session.role = userrole;
+    res.send({id: userid,name: username, role:userrole});
     console.log("New staff member has been created successfully");
   } catch (error) {
     res.send(error);
@@ -68,6 +73,17 @@ router.get("/:id", async (req, res) => {
     const staff = await getStaff(id);
     // console.log(staff.rows);
     res.send(staff.rows);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+router.get("getRoleById/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const role = await getRoleById(id);
+    console.log(role.rows);
+    res.send(role.rows);
   } catch (error) {
     res.send(error);
   }

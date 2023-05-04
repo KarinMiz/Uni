@@ -12,7 +12,7 @@ const jsonwebtoken = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const sessions = require("express-session");
 const { getStaff } = require("./api/staff");
-const bcrypt = require ('bcrypt');
+const bcrypt = require("bcrypt");
 // a variable to save a session
 var session;
 
@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 // cookie parser middleware
 app.use(cookieParser());
 
-app.use(cors({ origin: ['http://localhost:3000'], credentials: true }));
+app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
 
 // creating 24 hours from milliseconds
 const oneDay = 1000 * 60 * 60 * 24;
@@ -49,8 +49,12 @@ app.get("/", (req, res) => {
 
 app.get("/currentUser", (req, res) => {
   console.log(req.session);
-  if (req.session.userid) {
-    res.send(`Welcome User with id: ${req.session.userid} `);
+  if (req.session.id) {
+    res.send({
+      id: req.session.userid,
+      name: req.session.name,
+      role: req.session.role,
+    });
   } else res.send(`error with session`);
 });
 
@@ -62,20 +66,20 @@ app.post("/login", async (req, res) => {
     const nothashpassword = req.body.password;
     const hashpassword = isExist.rows[0].password;
     // check password
-      const match = await bcrypt.compare(nothashpassword, hashpassword);
-      if(match) {
-           // write the user id on the session
-          //  console.log(match);
-           req.session.userid = isExist.rows[0].id;
-           
-           res.send("ok")
-      }else{
-        res.send("wrong password")
-      }
-   
-  }else{
+    const match = await bcrypt.compare(nothashpassword, hashpassword);
+    if (match) {
+      // write the user id on the session
+      //  console.log(match);
+      req.session.userid = isExist.rows[0].id;
+      req.session.name = isExist.rows[0].name;
+      req.session.role = isExist.rows[0].job;
+      res.send("ok");
+    } else {
+      res.send("wrong password");
+    }
+  } else {
     console.log("user doesnt exist");
-    res.send("user doesnt exist")
+    res.send("user doesnt exist");
   }
 });
 

@@ -1,34 +1,48 @@
-import React, { useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
 import Navbar from "../src/components/Navbar/Navbar";
-import HomePage from "../src/pages/HomePage/HomePage"
+import HomePage from "../src/pages/HomePage/HomePage";
 import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignInPage from './pages/Connection/SignInPage';
-import RegistrationPage from './pages/Connection/RegistrationPage';
-import DirectorsPage from './pages/DirectorPages/DirectorsPage';
-import TeachersManagement from './pages/DirectorPages/TeachersManagement';
-import StudentsManagement from './pages/DirectorPages/StudentsManagement';
-import ChangingLists from './pages/DirectorPages/ChangingLists';
-import CoursesDisplay from './pages/DirectorPages/CoursesDisplay';
-import axios from 'axios';
+import SignInPage from "./pages/Connection/SignInPage";
+import RegistrationPage from "./pages/Connection/RegistrationPage";
+import DirectorsPage from "./pages/DirectorPages/DirectorsPage";
+import TeachersManagement from "./pages/DirectorPages/TeachersManagement";
+import StudentsManagement from "./pages/DirectorPages/StudentsManagement";
+import ChangingLists from "./pages/DirectorPages/ChangingLists";
+import CoursesDisplay from "./pages/DirectorPages/CoursesDisplay";
+import axios from "axios";
+import TeacherPage from "./pages/TeacherPages/TeacherPage";
+
+export const CurrentUserContext = createContext({});
 
 function App() {
   const apiUrl = "http://localhost:8080/currentUser";
 
+  const [currentUser, setCurrentUser] = useState({});
+
   const checkSession = async () => {
     try {
       const res = await axios.get(apiUrl, { withCredentials: true });
+      console.log(res.data);
+      setCurrentUser({
+        id: res.data.id,
+        name:res.data.name,
+        role: res.data.role,
+      });
+
       return res.data;
     } catch (err) {
       console.log(err);
     }
   };
-  useEffect(()=>{
+
+  useEffect(() => {
     checkSession();
-  },[])
+  }, []);
+
   return (
-    <div>
+    <CurrentUserContext.Provider value={currentUser} >
       <Navbar />
       <div className="App">
         <BrowserRouter>
@@ -36,15 +50,16 @@ function App() {
             <Route path="/" element={<SignInPage />} />
             <Route path="/homePage" element={<HomePage />} />
             <Route path="/regist" element={<RegistrationPage />} />
-            <Route path="/directorsPage" element={<DirectorsPage/>}/>
-            <Route path="/teacherManagement" element={<TeachersManagement/>}/>
-            <Route path="/studentManagement" element={<StudentsManagement/>}/>     
-            <Route path="/changingLists" element={<ChangingLists/>}/>
-            <Route path="/coursesDisplay" element={<CoursesDisplay/>}/>
+            <Route path="/directorsPage" element={<DirectorsPage />} />
+            <Route path="/teacherManagement" element={<TeachersManagement />} />
+            <Route path="/studentManagement" element={<StudentsManagement />} />
+            <Route path="/changingLists" element={<ChangingLists />} />
+            <Route path="/coursesDisplay" element={<CoursesDisplay />} />
+            <Route path="/teachersPage" element={<TeacherPage />} />
           </Routes>
         </BrowserRouter>
       </div>
-    </div>
+    </CurrentUserContext.Provider >
   );
 }
 

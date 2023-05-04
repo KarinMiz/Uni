@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { CurrentUserContext } from "../../App";
 import { Input, Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,7 +10,8 @@ const SignInPage = () => {
   const [id, setId] = useState();
   const [password, setPassword] = useState();
   const [message, setMessage] = useState(null);
-
+  const currentUser = useContext(CurrentUserContext);
+  
   const handleChangeId = (e) => {
     setId(e.target.value);
   };
@@ -57,7 +59,7 @@ const SignInPage = () => {
   return (
     <div>
       <title>TLV University</title>
-      <h3>your management site</h3>
+      <h1>Sign In Page</h1>
       <Grid
         container
         spacing={5}

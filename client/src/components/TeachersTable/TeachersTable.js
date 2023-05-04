@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 import {
+  CardMedia,
   Button,
   Paper,
   Table,
@@ -33,6 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const TeachersTable = (props) => {
+  const imageApiUrl = "http://localhost:8080/staff/getPicture/";
   return (
     <div className="form-task">
       <TableContainer component={Paper}>
@@ -41,24 +43,44 @@ const TeachersTable = (props) => {
             <TableRow>
               <TableCell>Picture</TableCell>
               <TableCell>Name</TableCell>
-              <TableCell>Professions</TableCell>
+              <TableCell>Authority</TableCell>
               <TableCell>Actions</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {props.teachers.map((s) => (
               <StyledTableRow key={s.id}>
-                <StyledTableCell component="th" scope="row">
-                  <img src={s.picture} alt="img"/>
+                <StyledTableCell component="th" scope="row" align="left">
+                  <CardMedia
+                    component="img"
+                    src={`${imageApiUrl}${s.id}`}
+                    height="115"
+                    sx={{ objectFit: "contain" }}
+                  />
                 </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
-                {s.name}
+                  {s.name}
                 </StyledTableCell>
-                <StyledTableCell align="left">{s.job}</StyledTableCell>
+                <StyledTableCell align="left">
+                  <div>List of Authority</div>
+                  <Button variant="contained" color="primary"  scope="row">
+                      +
+                    </Button>
+                  </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
-                  <Button variant="contained" color="primary">
-                    Manage Courses
-                  </Button>
+                  <StyledTableRow >
+                    <Button variant="contained" color="primary"  scope="row">
+                      Editing Courses
+                    </Button>
+                  </StyledTableRow>
+                  <StyledTableRow  sx={{ minWidth: 650 }}>
+                    <Button variant="contained" color="primary"  scope="row">
+                      Courses Manage
+                    </Button>
+                  </StyledTableRow>
+                </StyledTableCell>
+                <StyledTableCell component="th" scope="row">
                   <Button variant="contained" color="primary">
                     Dismissal Teachers
                   </Button>

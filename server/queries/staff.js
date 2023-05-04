@@ -6,9 +6,11 @@ const updateStaffQuery = "UPDATE staff SET name=$1, password=$2, job=$3, gender=
 
 const getStaffQuery = "SELECT * FROM staff WHERE id = $1"
 
-const deleteStaffQuery = "DELETE FROM staff WHERE id = $1;";
+const deleteStaffQuery = "DELETE FROM staff WHERE id = $1";
 
 const getTeachersQuery = "SELECT * FROM staff WHERE job='teacher'";
+
+const getRoleByIdQuery = "SELECT job FROM staff WHERE id = $1"
 
 
 module.exports = {
@@ -17,7 +19,8 @@ module.exports = {
     updateStaffQuery,
     getStaffQuery,
     deleteStaffQuery,
-    getTeachersQuery
+    getTeachersQuery,
+    getRoleByIdQuery
 }
 
 

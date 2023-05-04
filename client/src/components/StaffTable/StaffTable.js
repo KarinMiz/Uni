@@ -69,8 +69,7 @@ const StaffTable = (props) => {
           <TableBody>
             {props.staff.map((s) => (
               <StyledTableRow key={s.id}>
-                <StyledTableCell component="th" scope="row">
-                  {/* <img src={()=>{getImage(s.id)}} alt={s.id}/> */}
+                <StyledTableCell component="th" scope="row" align="left">
                   <CardMedia component="img" src={`${imageApiUrl}${s.id}`} height="115"  sx={{objectFit: "contain" }}  />
                 </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
