@@ -1,17 +1,50 @@
 import React, { useEffect, useState, useContext } from "react";
-import { CurrentUserContext } from "../../App";
+import { UserContext } from "../../App";
 import { Input, Button, Grid } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,redirect } from "react-router-dom";
 import axios from "axios";
 
 const SignInPage = () => {
   const navigate = useNavigate();
   const loginApiUrl = "http://localhost:8080/login";
+  const currentuserApiUrl = "http://localhost:8080/currentUser";
   const [id, setId] = useState();
   const [password, setPassword] = useState();
   const [message, setMessage] = useState(null);
-  const currentUser = useContext(CurrentUserContext);
+  const userContext = useContext(UserContext);
   
+  // const [currentUser, setCurrentUser] = useState({});
+  const loader = async () => {
+    if(userContext.currentUser.id){
+      return redirect("/homePage");
+    }
+    return null;
+  };
+  const checkSession = async () => {
+    try {
+      const res = await axios.get(currentuserApiUrl, { withCredentials: true });
+      console.log(res.data);
+      // setCurrentUser({
+      //   id: res.data.id,
+      //   name:res.data.name,
+      //   role: res.data.role,
+      // });
+      userContext.setCurrentUser({
+        id: res.data.id,
+        name:res.data.name,
+        role: res.data.role,
+      }); 
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    loader();
+    checkSession();
+  }, []);
+
+
   const handleChangeId = (e) => {
     setId(e.target.value);
   };
@@ -45,6 +78,7 @@ const SignInPage = () => {
           setMessage("wrong password");
         }
         else{
+          //login
           navigate("/homePage");
         }
         
@@ -80,7 +114,7 @@ const SignInPage = () => {
         </Grid>
         <Grid item xs={8}>
           New Here?
-          <a href="/regist"> Create an acoount</a>
+          <a href="/register"> Create an acoount</a>
         </Grid>       
         <Grid item xs={8}>
           <h3 className="error-msg">{message}</h3>

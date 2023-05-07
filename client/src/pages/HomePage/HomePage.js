@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import StaffTable from "../../components/StaffTable/StaffTable";
+import "./HomePage.css";
 
 const HomePage = () => {
   const [staff, setStaff] = useState([]);
@@ -48,7 +49,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>Current Staff:</h1>
+      <h1 className="homepage-title">Current Staff:</h1>
 
       {staff.length > 0 ? (
         <div className="staff">

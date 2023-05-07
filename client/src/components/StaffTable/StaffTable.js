@@ -51,11 +51,12 @@ const StaffTable = (props) => {
 
 
   return (
-    <div className="form-task">
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
+    <Paper className="form-task">
+      <TableContainer> 
+        {/* <Table sx={{ minWidth: 700 }} aria-label="customized table"> */}
+        <Table stickyHeader aria-label="sticky table" >
+          <TableHead  >
+            <TableRow >
               <TableCell>Picture</TableCell>
               <TableCell>Name</TableCell>
               {props.type === "b" ?
@@ -88,7 +89,7 @@ const StaffTable = (props) => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Paper>
   );
 };
 

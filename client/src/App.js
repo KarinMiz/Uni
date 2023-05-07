@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import Navbar from "../src/components/Navbar/Navbar";
 import HomePage from "../src/pages/HomePage/HomePage";
 import "./App.css";
@@ -14,13 +14,19 @@ import CoursesDisplay from "./pages/DirectorPages/CoursesDisplay";
 import axios from "axios";
 import TeacherPage from "./pages/TeacherPages/TeacherPage";
 
-export const CurrentUserContext = createContext({});
+export const UserContext = createContext({
+  currentUser: '',
+  setCurrentUser: ()=> {},
+});
 
 function App() {
   const apiUrl = "http://localhost:8080/currentUser";
 
   const [currentUser, setCurrentUser] = useState({});
-
+  const value = useMemo(
+    () => ({ currentUser, setCurrentUser }), 
+    [currentUser]
+  );
   const checkSession = async () => {
     try {
       const res = await axios.get(apiUrl, { withCredentials: true });
@@ -42,14 +48,14 @@ function App() {
   }, []);
 
   return (
-    <CurrentUserContext.Provider value={currentUser} >
+    <UserContext.Provider value={value} >
       <Navbar />
       <div className="App">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<SignInPage />} />
             <Route path="/homePage" element={<HomePage />} />
-            <Route path="/regist" element={<RegistrationPage />} />
+            <Route path="/register" element={<RegistrationPage />} />
             <Route path="/directorsPage" element={<DirectorsPage />} />
             <Route path="/teacherManagement" element={<TeachersManagement />} />
             <Route path="/studentManagement" element={<StudentsManagement />} />
@@ -59,7 +65,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </div>
-    </CurrentUserContext.Provider >
+    </UserContext.Provider >
   );
 }
 

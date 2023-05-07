@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import {
   Input,
@@ -17,6 +18,7 @@ const RegistrationPage = () => {
   const uploadApiUrl = "http://localhost:8080/staff/upload";
   const checkIdApiUrl = "http://localhost:8080/staff/";
   const currentDate = new Date().toISOString().slice(0, 16);
+  const userContext = useContext(UserContext);
   const navigate = useNavigate();
 
   const [id, setId] = useState();
@@ -78,7 +80,9 @@ const RegistrationPage = () => {
 
     if (id && existId.data[0]) {
       setIsExist(true);
-      setMessage("User id already exists! Please choose another id or sign in ");
+      setMessage(
+        "User id already exists! Please choose another id or sign in "
+      );
     } else if (id && name && password && birthday) {
       e.preventDefault();
       try {
@@ -88,10 +92,11 @@ const RegistrationPage = () => {
           job: role,
           gender: gender,
           birthday: birthday,
-          id: id
+          id: id,
         };
+        userContext.setCurrentUser({ id: id, name: name, role: role });
         console.log(body);
-        await axios.post(addStaffApiUrl, body ,{ withCredentials: true });
+        await axios.post(addStaffApiUrl, body, { withCredentials: true });
         pictureUpload();
         navigate("/homePage");
       } catch (error) {
@@ -123,7 +128,11 @@ const RegistrationPage = () => {
         <Grid item xs={8}>
           <FormControl sx={{ minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Role</InputLabel>
-            <Select onChange={handleChangeRole} label="Role" defaultValue={role}>
+            <Select
+              onChange={handleChangeRole}
+              label="Role"
+              defaultValue={role}
+            >
               <MenuItem value="director">director</MenuItem>
               <MenuItem value="teacher">teacher</MenuItem>
             </Select>
@@ -132,7 +141,11 @@ const RegistrationPage = () => {
         <Grid item xs={8}>
           <FormControl sx={{ minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-            <Select onChange={handleChangeGender} label="Gender" defaultValue={gender}>
+            <Select
+              onChange={handleChangeGender}
+              label="Gender"
+              defaultValue={gender}
+            >
               <MenuItem value="female">female</MenuItem>
               <MenuItem value="male">male</MenuItem>
             </Select>
@@ -155,10 +168,7 @@ const RegistrationPage = () => {
           <Button onClick={handleClick} variant="contained" color="primary">
             Sign up
           </Button>
-          {
-            isExist? <h3>{message}</h3>
-            : <></>
-          }
+          {isExist ? <h3>{message}</h3> : <></>}
         </Grid>
       </Grid>
     </div>

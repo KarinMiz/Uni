@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { CurrentUserContext } from "../../App";
+import { UserContext } from "../../App";
 import "./Navbar.css";
 import axios from "axios";
 
 export default function Navbar() {
   const path = window.location.pathname;
-  const currentUser = useContext(CurrentUserContext);
+  const userContext = useContext(UserContext);
   const logoutApiUrl = "http://localhost:8080/logout";
 
   const handleLogout = async () => {
@@ -23,22 +23,24 @@ export default function Navbar() {
       >
         TLV Uni
       </h6>
-      <div className="user-details">
-        {" "}
-        {currentUser.name
-          ? `     ${currentUser.name} | role: ${currentUser.role}`
-          : null}
-      </div>
-      {currentUser.name ? (
+      <span className="user-details">
+        {userContext.currentUser.name ? (
+          <span>
+            <div>{userContext.currentUser.name}</div>
+            <div>role: {userContext.currentUser.role}</div>
+          </span>
+        ) : null}
+      </span>
+      {userContext.currentUser.name ? (
         <ul>
           <li className={path === "/homePage" ? "active" : ""}>
             <a href="/homePage">Home</a>
           </li>
-          {currentUser.role === "director" ? (
+          {userContext.currentUser.role === "director" ? (
             <li className={path === "/directorsPage" ? "active" : ""}>
               <a href="/directorsPage">Directors Pages</a>
             </li>
-          ) : currentUser.role === "teacher" ? (
+          ) : userContext.currentUser.role === "teacher" ? (
             <li className={path === "/teachersPage" ? "active" : ""}>
               <a href="/teachersPage">Teachers Pages</a>
             </li>
