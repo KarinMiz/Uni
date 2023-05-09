@@ -16,6 +16,7 @@ const TeachersManagement = () => {
 
   const apiUrl = "http://localhost:8080/staff";
 
+
   const fetchAllStaff = async () => {
     try {
       const res = await axios.get(apiUrl);

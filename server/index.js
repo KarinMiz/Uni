@@ -3,7 +3,9 @@ const coursesRoutes = require("./routes/courses");
 const professionsRoutes = require("./routes/professions");
 const staffRoutes = require("./routes/staff");
 const studentsRoutes = require("./routes/students");
-const authRoutes = require("./routes/auth");
+const authoritiesRoutes = require("./routes/authorities");
+const courseStudents = require("./routes/course_students");
+// const authRoutes = require("./routes/auth");
 const db = require("./db");
 const cors = require("cors");
 const app = express();
@@ -41,6 +43,8 @@ app.use("/courses", coursesRoutes);
 app.use("/professions", professionsRoutes);
 app.use("/staff", staffRoutes);
 app.use("/students", studentsRoutes);
+app.use("/authorities", authoritiesRoutes);
+app.use("/courseStudents", courseStudents);
 // app.use("/auth", authRoutes);
 
 app.get("/", (req, res) => {
@@ -73,7 +77,11 @@ app.post("/login", async (req, res) => {
       req.session.userid = isExist.rows[0].id;
       req.session.name = isExist.rows[0].name;
       req.session.role = isExist.rows[0].job;
-      res.send("ok");
+      res.send({
+        id:isExist.rows[0].id,
+        name: isExist.rows[0].name,
+        role:  isExist.rows[0].job
+      });
     } else {
       res.send("wrong password");
     }

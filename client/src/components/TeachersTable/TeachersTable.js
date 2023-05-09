@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { styled } from "@mui/material/styles";
 import {
   CardMedia,
@@ -12,6 +13,8 @@ import {
   TableRow,
   tableCellClasses,
 } from "@mui/material";
+import AuthorityList from "../AuthorityList/AuthorityList";
+import AuthorityDialog from "../Dialog/AuthorityDialog";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,6 +38,25 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const TeachersTable = (props) => {
   const imageApiUrl = "http://localhost:8080/staff/getPicture/";
+  // const authorityApiUrl = "http://localhost:8080/authorities/addAuthority";
+  // const [isClicked, setIsClicked] = useState(false);
+  // const [authority, setAuthority] = useState([]);
+
+  // const addAuthority = async (id) => {
+  //   try {
+  //     const body = {
+  //       profession_id: 0,
+  //       teacher_id: id,
+  //       isAvaliable: "true",
+  //     };
+  //     const res = await axios.get(authorityApiUrl, body);
+  //     setAuthority(res.data);
+  //     return res.data;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   return (
     <div className="form-task">
       <TableContainer component={Paper}>
@@ -64,18 +86,26 @@ const TeachersTable = (props) => {
                 </StyledTableCell>
                 <StyledTableCell align="left">
                   <div>List of Authority</div>
-                  <Button variant="contained" color="primary"  scope="row">
-                      +
-                    </Button>
-                  </StyledTableCell>
+                  <AuthorityList id={s.id} />
+                  {/* <Button
+                    variant="contained"
+                    color="primary"
+                    scope="row"
+                    onClick={() => setIsClicked(true)}
+                  >
+                    +
+                  </Button> */}
+                  {/* {isClicked ? <AuthorityDialog key={s.id} id={s.id} /> : null} */}
+                  <AuthorityDialog key={s.id} id={s.id} name={s.name}/> 
+                </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
-                  <StyledTableRow >
-                    <Button variant="contained" color="primary"  scope="row">
+                  <StyledTableRow>
+                    <Button variant="contained" color="primary" scope="row">
                       Editing Courses
                     </Button>
                   </StyledTableRow>
-                  <StyledTableRow  sx={{ minWidth: 650 }}>
-                    <Button variant="contained" color="primary"  scope="row">
+                  <StyledTableRow sx={{ minWidth: 650 }}>
+                    <Button variant="contained" color="primary" scope="row">
                       Courses Manage
                     </Button>
                   </StyledTableRow>

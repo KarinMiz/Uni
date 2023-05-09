@@ -14,12 +14,12 @@ const SignInPage = () => {
   const userContext = useContext(UserContext);
   
   // const [currentUser, setCurrentUser] = useState({});
-  const loader = async () => {
-    if(userContext.currentUser.id){
-      return redirect("/homePage");
-    }
-    return null;
-  };
+  // const loader = async () => {
+  //   if(userContext.currentUser.id){
+  //     return redirect("/homePage");
+  //   }
+  //   return null;
+  // };
   const checkSession = async () => {
     try {
       const res = await axios.get(currentuserApiUrl, { withCredentials: true });
@@ -29,18 +29,14 @@ const SignInPage = () => {
       //   name:res.data.name,
       //   role: res.data.role,
       // });
-      userContext.setCurrentUser({
-        id: res.data.id,
-        name:res.data.name,
-        role: res.data.role,
-      }); 
+
       return res.data;
     } catch (err) {
       console.log(err);
     }
   };
   useEffect(() => {
-    loader();
+    // loader();
     checkSession();
   }, []);
 
@@ -70,8 +66,9 @@ const SignInPage = () => {
           id: id,
           password: password,
         };
+        checkSession();
         const res = await axios.post(loginApiUrl, body, { withCredentials: true });
-       console.log(res);
+      //  console.log(res.data);
         if (res.data === "user doesnt exist") {
           setMessage("user doesnt exist");
         } else if (res.data === "wrong password") {
@@ -79,6 +76,12 @@ const SignInPage = () => {
         }
         else{
           //login
+          userContext.setCurrentUser({
+            id: res.data.id,
+            name:res.data.name,
+            role: res.data.role,
+          }); 
+          console.log("---------------"+userContext.currentUser);
           navigate("/homePage");
         }
         
