@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { UserContext } from "../../App";
@@ -34,22 +34,23 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const CoursePage = () => {
+const CoursePage = (props) => {
   const navigate = useNavigate();
   const userContext = useContext(UserContext);
-  
-  // localStorage.setItem(userId, JSON.stringify(userContext));
+//   const courseId = props.params;
   const [courses, setCourses] = useState([]);
-  const apiUrl = "http://localhost:8080/courses/";
+  const apiUrl = "http://localhost:8080/courseStudents/";
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const handleButtonClick = () => {
-    navigate("/coursesManagement");
-  };
+//   const handleButtonClick = () => {
+//     navigate("/coursesManagement");
+//   };
 
   const getCourses = async () => {
     try {
-      const res = await axios.get(`${apiUrl}${userContext.currentUser.id}`);
+      const res = await axios.get(`${apiUrl}${searchParams.get('id')}`);
       setCourses(res.data);
+    //   console.log(courseId);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -62,14 +63,14 @@ const CoursePage = () => {
 
   return (
     <div className="form-task">
-      <h1>Courses Management</h1>
+      <h1>Course Name</h1>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <TableCell>Course Name</TableCell>
-              <TableCell>Profession</TableCell>
-              <TableCell>Status</TableCell>
+              <TableCell>Student id</TableCell>
+              <TableCell>Student name</TableCell>
+              <TableCell>Average grade</TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
@@ -87,9 +88,9 @@ const CoursePage = () => {
                 {c.status}
                 </StyledTableCell>
               <StyledTableCell component="th" scope="row">
-                <Button variant="contained" color="primary" scope="row" onClick={handleButtonClick}>
+                {/* <Button variant="contained" color="primary" scope="row" onClick={handleButtonClick}>
                   course page
-                </Button>
+                </Button> */}
               </StyledTableCell>
               <StyledTableCell component="th" scope="row"></StyledTableCell>
             </StyledTableRow>

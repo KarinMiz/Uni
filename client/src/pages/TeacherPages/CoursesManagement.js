@@ -58,9 +58,9 @@ const CoursesManagement = () => {
 //     }
 //   };
 
-  useEffect(()=>{
+//   useEffect(()=>{
 
-  }, []);
+//   }, []);
 
   return (
     <div className="form-task">

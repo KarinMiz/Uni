@@ -14,6 +14,7 @@ import CoursesDisplay from "./pages/DirectorPages/CoursesDisplay";
 import axios from "axios";
 import TeacherPage from "./pages/TeacherPages/TeacherPage";
 import CoursesManagement from "./pages/TeacherPages/CoursesManagement";
+import CoursePage from "./pages/TeacherPages/CoursePage";
 
 export const UserContext = createContext({
   currentUser: '',
@@ -31,7 +32,7 @@ function App() {
   const checkSession = async () => {
     try {
       const res = await axios.get(apiUrl, { withCredentials: true });
-      console.log(res.data);
+      // console.log(res.data);
       setCurrentUser({
         id: res.data.id,
         name:res.data.name,
@@ -64,6 +65,7 @@ function App() {
             <Route path="/coursesDisplay" element={<CoursesDisplay />} />
             <Route path="/teachersPage" element={<TeacherPage />} />
             <Route path="/coursesManagement" element={<CoursesManagement />} />
+            <Route path="/CoursePage/:id" element={<CoursePage />} />
           </Routes>
         </BrowserRouter>
       </div>

@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/currentUser", (req, res) => {
-  console.log(req.session);
+  // console.log(req.session);
   if (req.session.id) {
     res.send({
       id: req.session.userid,

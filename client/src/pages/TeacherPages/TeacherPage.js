@@ -37,13 +37,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const TeacherPage = () => {
   const navigate = useNavigate();
   const userContext = useContext(UserContext);
-  
-  // localStorage.setItem(userId, JSON.stringify(userContext));
+
   const [courses, setCourses] = useState([]);
   const apiUrl = "http://localhost:8080/courses/";
 
-  const handleButtonClick = () => {
-    navigate("/coursesManagement");
+  const handleButtonClick = (courseID) => {
+    navigate(`/CoursePage/${courseID}`);
   };
 
   const getCourses = async () => {
@@ -87,7 +86,7 @@ const TeacherPage = () => {
                 {c.status}
                 </StyledTableCell>
               <StyledTableCell component="th" scope="row">
-                <Button variant="contained" color="primary" scope="row" onClick={handleButtonClick}>
+                <Button variant="contained" color="primary" scope="row" onClick={()=>handleButtonClick(c.id)}>
                   course page
                 </Button>
               </StyledTableCell>
