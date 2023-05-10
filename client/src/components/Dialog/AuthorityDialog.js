@@ -2,7 +2,6 @@ import React, { useState,useEffect } from "react";
 import axios from "axios";
 import {
   Button,
-  TextField,
   Dialog,
   DialogActions,
   DialogContent,
@@ -18,20 +17,7 @@ const AuthorityDialog = (props) => {
   const [existAuthorities, setExistAuthorities] = useState([]);
   const [avaliableAuthorities, setAvaliableAuthorities] = useState([]);
 
-  const getAllProfessions = async () => {
-    try {
-      const res = await axios.get(professionsApiUrl);
-      console.log("111111111111111111111111111111111");
-      if (res.data?.length !== 0) {
-        console.log("2222222222222222222222222222222222");
-        setProfessions(res.data);
-        console.log(professions);
-        return res.data;
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
   const getTeacherAuthorities = async () => {
     try {
       const res = await axios.get(`${authorityApiUrl}${props.id}`);
@@ -46,6 +32,21 @@ const AuthorityDialog = (props) => {
   };
 
   useEffect(() => {
+    const getAllProfessions = async () => {
+        console.log("hereeeeeeeeeeeeeeeeeeeeee");
+        try {
+          const res = await axios.get(professionsApiUrl);
+          console.log("111111111111111111111111111111111");
+          if (res.data?.length !== 0) {
+            console.log("2222222222222222222222222222222222");
+            setProfessions(res.data);
+            console.log(professions);
+            return res.data;
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      };
     getAllProfessions();
   }, []);
   useEffect(() => {

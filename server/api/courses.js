@@ -21,7 +21,6 @@ const getOpenCourses = async () => {
 
   const addCourse = async (values) => {
     return await runQuery(addCourseQuery, [
-      values[0],
       values[1],
       values[2],
       values[3]

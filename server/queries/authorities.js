@@ -1,8 +1,8 @@
 const getAllAuthoritiesQuery = "SELECT * FROM authorities";
 
-const addAuthorityQuery = "INSERT INTO authorities(profession_id,teacher_id,isAvaliable) VALUES ($1, $2, $3)";
+const addAuthorityQuery = "INSERT INTO authorities(profession_id,teacher_id,isavaliable) VALUES ($1, $2, $3)";
 
-const updateAuthorityQuery = "UPDATE authorities SET isAvaliable=$1 WHERE profession_id=$2 AND teacher_id=$3";
+const updateAuthorityQuery = "UPDATE authorities SET isavaliable=$1 WHERE profession_id=$2 AND teacher_id=$3";
 
 const getTeacherAuthorityQuery = "SELECT professions.name as p_name FROM authorities JOIN professions ON authorities.profession_id = professions.id WHERE teacher_id = $1 AND isavaliable=true"
 

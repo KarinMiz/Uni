@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { UserContext } from "../../App";
 import {
+  CardMedia,
   Button,
   Paper,
   Table,
@@ -34,31 +35,32 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TeacherPage = () => {
+const CoursesManagement = () => {
   const navigate = useNavigate();
   const userContext = useContext(UserContext);
-  
-  // localStorage.setItem(userId, JSON.stringify(userContext));
+  const userId = userContext.currentUser.id;
   const [courses, setCourses] = useState([]);
   const apiUrl = "http://localhost:8080/courses/";
-
+  
   const handleButtonClick = () => {
     navigate("/coursesManagement");
   };
 
-  const getCourses = async () => {
-    try {
-      const res = await axios.get(`${apiUrl}${userContext.currentUser.id}`);
-      setCourses(res.data);
-      return res.data;
-    } catch (err) {
-      console.log(err);
-    }
-  };
+//   const getCourses = async () => {
+//     try {
+//       const res = await axios.get(`${apiUrl}${userId}`);
+//       setCourses(res.data);
+//       console.log("here2222222");
+//       console.log(res.data);
+//       return res.data;
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
 
   useEffect(()=>{
-    getCourses();
-  }, [userContext]);
+
+  }, []);
 
   return (
     <div className="form-task">
@@ -101,4 +103,4 @@ const TeacherPage = () => {
   );
 };
 
-export default TeacherPage;
+export default CoursesManagement;

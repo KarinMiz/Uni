@@ -34,7 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TeacherPage = () => {
+const CoursePage = () => {
   const navigate = useNavigate();
   const userContext = useContext(UserContext);
   
@@ -101,4 +101,4 @@ const TeacherPage = () => {
   );
 };
 
-export default TeacherPage;
+export default CoursePage;

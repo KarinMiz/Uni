@@ -13,6 +13,7 @@ import ChangingLists from "./pages/DirectorPages/ChangingLists";
 import CoursesDisplay from "./pages/DirectorPages/CoursesDisplay";
 import axios from "axios";
 import TeacherPage from "./pages/TeacherPages/TeacherPage";
+import CoursesManagement from "./pages/TeacherPages/CoursesManagement";
 
 export const UserContext = createContext({
   currentUser: '',
@@ -62,6 +63,7 @@ function App() {
             <Route path="/changingLists" element={<ChangingLists />} />
             <Route path="/coursesDisplay" element={<CoursesDisplay />} />
             <Route path="/teachersPage" element={<TeacherPage />} />
+            <Route path="/coursesManagement" element={<CoursesManagement />} />
           </Routes>
         </BrowserRouter>
       </div>

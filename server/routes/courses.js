@@ -40,7 +40,6 @@ router.get("/open", async (req, res) => {
 router.post("/addCourse", async (req, res) => {
   try {
     const values = [
-      req.body.id,
       req.body.profession_id,
       req.body.teacher_id,
       req.body.status
