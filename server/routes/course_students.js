@@ -18,9 +18,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/getStudentsByCourseId", async (req, res) => {
+router.get("/getStudentsByCourseId/:id", async (req, res) => {
   try {
-    id = req.body.id;
+    id = req.params.id;
     const students = await getAllStudentsByCourseId(id);
     res.send(students.rows);
   } catch (error) {
@@ -61,7 +61,7 @@ router.get("/getAverageGradesbyCourseId", async (req, res) => {
 
 router.get("/getAverageGradesbyStudentId", async (req, res) => {
     try {
-      id = req.body.id;
+      id = req.params.id;
       const average_grade = await getAverageGradesbyStudentId(id);
       res.send(average_grade.rows);
     } catch (error) {

@@ -42,12 +42,15 @@ const TeacherPage = () => {
   const apiUrl = "http://localhost:8080/courses/";
 
   const handleButtonClick = (courseID) => {
-    navigate(`/CoursePage/${courseID}`);
+    console.log("HI IM HERE");
+    console.log(courseID); 
+    navigate(`/CoursePage`,{state: {courseId: courseID}} );
   };
 
   const getCourses = async () => {
     try {
       const res = await axios.get(`${apiUrl}${userContext.currentUser.id}`);
+      console.log(res.data);
       setCourses(res.data);
       return res.data;
     } catch (err) {
@@ -75,6 +78,7 @@ const TeacherPage = () => {
           <TableBody>
             {courses.length>0?
              courses.map((c) => (
+              
             <StyledTableRow>
               <StyledTableCell component="th" scope="row" align="left">
                 {c.name}

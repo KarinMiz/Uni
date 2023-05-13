@@ -105,9 +105,11 @@ router.get("/getPicture/:id", function (req, res, next) {
   var options = { root: path.join() };
   const id = req.params.id;
   const usetPicture = `staff-images/${id}.png`;
-  res.sendFile(usetPicture, options, function (err) {
+  console.log(usetPicture);
+    res.sendFile(usetPicture, options, function (err) {
     if (err) {
       const defaultPicture = "staff-images/default.png";
+      console.log(defaultPicture);
       res.sendFile(defaultPicture, options, function (err) {
         if (err) {
           next(err);

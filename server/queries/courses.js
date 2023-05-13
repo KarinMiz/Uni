@@ -1,6 +1,6 @@
 const getAllCoursesQuery = "SELECT courses.id,professions.name as p_name,staff.name as t_name,courses.status FROM courses JOIN professions ON courses.profession_id = professions.id JOIN staff ON courses.teacher_id = staff.id";
 
-const getCoursesForTeacherQuery = "SELECT courses.name,professions.name as p_name,courses.status FROM courses JOIN professions ON courses.profession_id = professions.id WHERE teacher_id = $1"
+const getCoursesForTeacherQuery = "SELECT courses.id,courses.name,professions.name as p_name,courses.status FROM courses JOIN professions ON courses.profession_id = professions.id WHERE teacher_id = $1"
 
 const getOpenCoursesQuery = "SELECT * FROM staff courses WHERE status=TRUE";
 

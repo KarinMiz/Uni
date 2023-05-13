@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { UserContext } from "../../App";
@@ -34,23 +34,28 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const CoursePage = (props) => {
+const CoursePage = (route) => {
   const navigate = useNavigate();
   const userContext = useContext(UserContext);
 //   const courseId = props.params;
   const [courses, setCourses] = useState([]);
-  const apiUrl = "http://localhost:8080/courseStudents/";
-  const [searchParams, setSearchParams] = useSearchParams()
-
+  const apiUrl = "http://localhost:8080/courseStudents/getStudentsByCourseId/";
+  // const [searchParams, setSearchParams] = useSearchParams()
+  const location = useLocation();
+  let courseId = location.state.courseId;
+  console.log(location.state);
+  console.log(`${apiUrl}${courseId}`);
+  console.log(courseId);
 //   const handleButtonClick = () => {
 //     navigate("/coursesManagement");
 //   };
 
   const getCourses = async () => {
     try {
-      const res = await axios.get(`${apiUrl}${searchParams.get('id')}`);
+      const res = await axios.get(`${apiUrl}${courseId}`);
+      console.log("hereeeeeeeeeeeeeeeee");
       setCourses(res.data);
-    //   console.log(courseId);
+      console.log(res.data);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -63,7 +68,7 @@ const CoursePage = (props) => {
 
   return (
     <div className="form-task">
-      <h1>Course Name</h1>
+      <h1>{courses.c_name}</h1>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
@@ -79,13 +84,13 @@ const CoursePage = (props) => {
              courses.map((c) => (
             <StyledTableRow>
               <StyledTableCell component="th" scope="row" align="left">
-                {c.name}
+                {c.s_id}
               </StyledTableCell>
               <StyledTableCell component="th" scope="row">
-              {c.p_name}
+              {c.s_name}
               </StyledTableCell>
               <StyledTableCell align="left">
-                {c.status}
+                {c.grade}
                 </StyledTableCell>
               <StyledTableCell component="th" scope="row">
                 {/* <Button variant="contained" color="primary" scope="row" onClick={handleButtonClick}>
